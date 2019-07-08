@@ -1,1 +1,70 @@
 /*  Styles! */
+#pokedexcard, #photoCard {
+  height: 20vh;
+  width: 90vw;
+  overflow-x: auto;
+  overflow-x: hidden;
+  display: none;
+  float: left;
+  z-index: 2;
+  margin-top: 10px;
+  margin-left: 5%;
+  margin-right: 5%;
+  align-items: center;
+  text-align: center;
+  align-content: center;
+  position: absolute;
+}
+
+#environmentCard {
+ z-index: 3;
+ height: 200px;
+ width:  50%;
+ position: absolute;
+ margin-right: 39%;
+ margin-left: 11%;
+display: none;
+
+}
+
+#infoCard {
+ z-index: 3;
+ height: 200px;
+ width:  50%;
+ position: absolute;
+ margin-left: 39%;
+ margin-right: 11%;
+display: none;
+}
+
+#pokedexViewer {
+  width: 90%;
+  margin-right: 5%;
+  margin-left: 5%;
+  margin-top: 50px;
+
+}
+
+#background1, #background2, #background3, #background4, #background5 {
+  display: none;
+}
+
+.pokemonSprites {
+
+  background: black;
+  width: 100% !important;
+}
+
+.pokemonSprites:hover {
+  background: gray;
+  align-self: center;
+}
+
+.navigationbutton {
+  width: 20%;
+  font-size: 30px !important;
+}
+
+#soundIsOff {
+  display: none;
+}
