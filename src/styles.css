@@ -20,16 +20,17 @@
 
 #environmentCard {
  z-index: 3;
-margin-top: 10px;
+ margin-top: 10px;
  width:  50%;
  position: absolute;
  margin-right: 39%;
  margin-left: 11%;
-display: none;
-font-family: 'Press Start 2P', cursive;
-text-align: center;
-text-shadow: 2px 2px 2px black;
-color: red;
+ display: none;
+ font-family: 'Press Start 2P', cursive;
+ text-align: center;
+ text-shadow: 2px 2px 2px black;
+ color: red;
+ overflow-x:auto;
 
 }
 
@@ -40,9 +41,9 @@ color: red;
  position: absolute;
  margin-left: 5%;
  margin-right: 5%;
-display: none;
-font-family: 'Press Start 2P', cursive;
-margin: 600px 50% 20% 200px;
+ display: none;
+ font-family: 'Press Start 2P', cursive;
+ margin: 600px 50% 20% 200px;
 }
 
 #pokedexViewer {
@@ -64,6 +65,8 @@ margin: 600px 50% 20% 200px;
   display: none;
   z-index: -1;
   height: 1100px;
+
+
 }
 
 #mainBoard {
@@ -91,8 +94,7 @@ margin: 600px 50% 20% 200px;
 
 .pokemonAnimation {
   z-index: 3;
-  /* margin-left: 50%;
-  margin-right: 50%; */
+
   position: absolute;
   /* top, right, bottom left */
   margin: 800px 50% 20px 50%;
