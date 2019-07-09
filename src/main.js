@@ -8,16 +8,36 @@ import './styles.css';
 $(document).ready(function() {
 // HTML elements and button logic
 
-let pokemonnumber = 151;
+// let pokemonnumber = 151;
+
+setTimeout(function(){
+  for (var i = 1; i <= 151; i++) {
+    // debugger;
+    let j = parseInt(i);
+    $.get(`https://pokeapi.co/api/v2/pokemon/${i}`).then(function(response) {
+
+      console.log(response);
+
+          $("#row1").append(`<div id='pokeSprite` + (j) + `'class='pokemonSprites col-1'><img src='${response.sprites.front_default}' alt='placeholder image of a pokemon for our pokedex.'></div>`)
 
 
 
 
-  for (var j = 0; j < 16; j++) {
-    for (var i = 0; i < 10; i++) {
-      $("#row" + (j + 1)).append(`"<div id='pokeSprite" + (i + 1) + "'class='pokemonSprites col-1'><img src='${response2.sprites.front_default}' alt='placeholder image of a pokemon for our pokedex.'></div>"`)
-    }
+
+      console.log("Success");
+    }).fail(function(){
+      console.log("Failure");
+    });
   }
+}, 0);
+
+
+
+  // for (var j = 0; j < 16; j++) {
+  //   for (var i = 0; i < 10; i++) {
+  //     $("#row" + (j + 1)).append(`"<div id='pokeSprite" + (i + 1) + "'class='pokemonSprites col-1'><img src='${response2.sprites.front_default}' alt='placeholder image of a pokemon for our pokedex.'></div>"`)
+  //   }
+  // }
 
 
 setInterval(function(){
