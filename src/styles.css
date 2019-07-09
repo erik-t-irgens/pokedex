@@ -1,1 +1,112 @@
 /*  Styles! */
+#pokedexcard, #photoCard {
+  height: 20vh;
+  width: 90%;
+  overflow-x: auto;
+  overflow-x: hidden;
+  display: none;
+  float: left;
+  z-index: 2;
+  margin-top: 10px;
+  margin-left: 5%;
+  margin-right: 5%;
+  align-items: center;
+  text-align: center;
+  align-content: center;
+  position: absolute;
+  font-family: 'Press Start 2P', cursive;
+  opacity: .4;
+}
+
+#environmentCard {
+ z-index: 3;
+margin-top: 10px;
+ width:  50%;
+ position: absolute;
+ margin-right: 39%;
+ margin-left: 11%;
+display: none;
+font-family: 'Press Start 2P', cursive;
+text-align: center;
+text-shadow: 2px 2px 2px black;
+color: red;
+
+}
+
+#infoCard {
+ z-index: 3;
+ height: 200px;
+ width:  90%;
+ position: absolute;
+ margin-left: 5%;
+ margin-right: 5%;
+display: none;
+font-family: 'Press Start 2P', cursive;
+margin: 600px 50% 20% 200px;
+}
+
+#pokedexViewer {
+  width: 90%;
+  margin-right: 5%;
+  margin-left: 5%;
+  margin-top: 50px;
+  font-family: 'Press Start 2P', cursive;
+  z-index: 0;
+  position: relative;
+
+}
+
+#pokedeximage {
+  height: 40px;
+}
+
+#background1, #background2, #background3, #background4, #background5 {
+  display: none;
+  z-index: -1;
+  height: 1100px;
+}
+
+#mainBoard {
+  background-color: #b3ffba;
+}
+
+.pokemonSprites {
+
+  background: #e3e3e3;
+  width: 100% !important;
+  opacity: 1 ;
+
+}
+
+.pokemonSprites:hover {
+  background: gray;
+  align-self: center;
+}
+
+.navigationbutton {
+  width: 20%;
+  font-size: 30px !important;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.pokemonAnimation {
+  z-index: 3;
+  /* margin-left: 50%;
+  margin-right: 50%; */
+  position: absolute;
+  /* top, right, bottom left */
+  margin: 800px 50% 20px 50%;
+  height: 250px;
+  width: auto;
+  left: 0;
+  bottom: 1;
+}
+
+.idle {
+  height: 110%;
+  width: auto;
+}
+
+#soundIsOff {
+  display: none;
+}
