@@ -36,12 +36,13 @@ color: red;
 #infoCard {
  z-index: 3;
  height: 200px;
- width:  50%;
+ width:  90%;
  position: absolute;
- margin-left: 39%;
- margin-right: 11%;
+ margin-left: 5%;
+ margin-right: 5%;
 display: none;
 font-family: 'Press Start 2P', cursive;
+margin: 600px 50% 20% 200px;
 }
 
 #pokedexViewer {
@@ -62,6 +63,7 @@ font-family: 'Press Start 2P', cursive;
 #background1, #background2, #background3, #background4, #background5 {
   display: none;
   z-index: -1;
+  height: 1100px;
 }
 
 #mainBoard {
@@ -93,14 +95,15 @@ font-family: 'Press Start 2P', cursive;
   margin-right: 50%; */
   position: absolute;
   /* top, right, bottom left */
-  margin: 800px 50% 20% 50%;
-
+  margin: 800px 50% 20px 50%;
+  height: 250px;
+  width: auto;
   left: 0;
   bottom: 1;
 }
 
 .idle {
-  height: 200px;
+  height: 110%;
   width: auto;
 }
 
