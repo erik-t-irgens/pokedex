@@ -3,7 +3,8 @@ import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
-
+import pokeArray from './pokedex.js'
+import pokeSpeciesArray from './pokedex.js'
 
 $(document).ready(function() {
 // HTML elements and button logic
@@ -66,15 +67,15 @@ setTimeout(function(){
                   $("#pokemonEvolveFromSprite").empty();
                 } else if (`${pokeArray[(arrayNumber - 1)].species.name}` == "nidorina") {
                   $("#pokemonEvolveFromSprite").hide();
-                  $("#pokemonEvolveFromSprite").html(`<div class='card bg-light border-dark' id='evolvesFromCard'><h6>${pokeArray[(arrayNumber - 1)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber - 1)].species.name.substring(1)} evolves from ${pokeArray[(arrayNumber - 2)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber - 2)].species.name.substring(1)}</h6></div><img class='idle' style='height:${parseFloat((pokeArray[(arrayNumber -2)].height)/10) * 10}vh;' src='https://www.pkparaiso.com/imagenes/xy/sprites/animados/nidoran_f.gif'>`);
+                  $("#pokemonEvolveFromSprite").html(`<div class='card bg-light border-dark' id='evolvesFromCard'><h6 class='evolvesText'>${pokeArray[(arrayNumber - 1)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber - 1)].species.name.substring(1)} evolves from ${pokeArray[(arrayNumber - 2)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber - 2)].species.name.substring(1)}</h6></div><img class='idle' style='height:${parseFloat((pokeArray[(arrayNumber -2)].height)/10) * 10}vh;' src='https://www.pkparaiso.com/imagenes/xy/sprites/animados/nidoran_f.gif'>`);
                   $("#pokemonEvolveFromSprite").slideDown();
                 } else if (`${pokeArray[(arrayNumber - 1)].species.name}` == "nidorino") {
                   $("#pokemonEvolveFromSprite").hide();
-                  $("#pokemonEvolveFromSprite").html(`<div class='card bg-light border-dark' id='evolvesFromCard'><h6>${pokeArray[(arrayNumber - 1)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber - 1)].species.name.substring(1)} evolves from ${pokeArray[(arrayNumber - 2)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber - 2)].species.name.substring(1)}</h6></div><img class='idle' style='height:${parseFloat((pokeArray[(arrayNumber -2)].height)/10) * 10}vh;' src='https://www.pkparaiso.com/imagenes/xy/sprites/animados/nidoran_m.gif'>`);
+                  $("#pokemonEvolveFromSprite").html(`<div class='card bg-light border-dark' id='evolvesFromCard'><h6 class='evolvesText'>${pokeArray[(arrayNumber - 1)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber - 1)].species.name.substring(1)} evolves from ${pokeArray[(arrayNumber - 2)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber - 2)].species.name.substring(1)}</h6></div><img class='idle' style='height:${parseFloat((pokeArray[(arrayNumber -2)].height)/10) * 10}vh;' src='https://www.pkparaiso.com/imagenes/xy/sprites/animados/nidoran_m.gif'>`);
                   $("#pokemonEvolveFromSprite").slideDown();
                 } else {
                   $("#pokemonEvolveFromSprite").hide();
-                  $("#pokemonEvolveFromSprite").html(`<div class='card bg-light border-dark' id='evolvesFromCard'><h6>${pokeArray[(arrayNumber - 1)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber - 1)].species.name.substring(1)} evolves from ${pokeArray[(arrayNumber - 2)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber - 2)].species.name.substring(1)}</h6></div><img class='idle' style='height:${parseFloat((pokeArray[(arrayNumber -2)].height)/10) * 10}vh;' src='https://www.pkparaiso.com/imagenes/xy/sprites/animados/${pokeArray[(arrayNumber - 2)].species.name}.gif'>`);
+                  $("#pokemonEvolveFromSprite").html(`<div class='card bg-light border-dark' id='evolvesFromCard'><h6 class='evolvesText'>${pokeArray[(arrayNumber - 1)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber - 1)].species.name.substring(1)} evolves from ${pokeArray[(arrayNumber - 2)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber - 2)].species.name.substring(1)}</h6></div><img class='idle' style='height:${parseFloat((pokeArray[(arrayNumber -2)].height)/10) * 10}vh;' src='https://www.pkparaiso.com/imagenes/xy/sprites/animados/${pokeArray[(arrayNumber - 2)].species.name}.gif'>`);
                   $("#pokemonEvolveFromSprite").slideDown();
                 }
               }
@@ -82,7 +83,7 @@ setTimeout(function(){
 
 
             // populate INFO CARD with Name from selection
-            $("#pokemonInfoName").html(`<h4>${pokeArray[(arrayNumber - 1)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber - 1)].species.name.substring(1)}</h4><hr>`);
+            $("#pokemonInfoName").html(`<h4 class='nameText'>${pokeArray[(arrayNumber - 1)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber - 1)].species.name.substring(1)}</h4><hr>`);
             // populate INFO CARD with Description from selection
             if (pokeSpeciesArray[(arrayNumber - 1)].flavor_text_entries.length > 0) {
               let description = (`${pokeSpeciesArray[(arrayNumber - 1)].flavor_text_entries[(pokeSpeciesArray[(arrayNumber - 1)].flavor_text_entries.length-1)].flavor_text}`);
@@ -96,6 +97,18 @@ setTimeout(function(){
                 $("#pokemonInfoType").append(`<h6>Type `+ (t+1)+ `: ${pokeArray[(arrayNumber - 1)].types[t].type.name}</h6>`);
               }
             }
+
+
+            // populate INFO CARD with HABITAT information
+            $('#pokemonInfoHabitat').html(`<h6>Habitat: ${pokeSpeciesArray[(arrayNumber - 1)].habitat.name.charAt(0).toUpperCase() + pokeSpeciesArray[(arrayNumber - 1)].habitat.name.substring(1)}</h6>`)
+
+            // populate INFO CARD with HEIGHT and WEIGHT information
+            $('#pokemonInfoHeight').html(`<h6>Height: ${parseFloat(pokeArray[(arrayNumber - 1)].height)/10}m</h6>`);
+            $('#pokemonInfoWeight').html(`<h6>Weight: ${parseFloat(pokeArray[(arrayNumber - 1)].weight)/10}kg</h6>`);
+
+
+
+
             // populate INFO CARD with RANDOM MOVES from selection
             // KNOWN BUG -- SOMETIMES RETURNS NO RESULT FOR POKEMON WITH FEW MOVES
             if (pokeArray[(arrayNumber - 1)].moves.length > 0) {
@@ -113,10 +126,6 @@ setTimeout(function(){
               $('#pokemonInfoSampleStatement').html("<h6>Sample Moves: </h6>");
               $('#pokemonInfoMoves1').append(`<h6>${pokeArray[(arrayNumber - 1)].moves[0].move.name}</h6>`);
             }
-            // populate INFO CARD with HABITAT information
-            $('#pokemonInfoHabitat').html(`<h6>Habitat: ${pokeSpeciesArray[(arrayNumber - 1)].habitat.name.charAt(0).toUpperCase() + pokeSpeciesArray[(arrayNumber - 1)].habitat.name.substring(1)}</h6>`)
-
-
           });
         }).fail(function(){
           console.log("Failure");

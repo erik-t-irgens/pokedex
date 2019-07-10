@@ -16,6 +16,7 @@
   position: absolute;
   font-family: 'Press Start 2P', cursive;
   opacity: .7;
+  box-shadow: 1px 1px 1px black;
 }
 
 #environmentCard {
@@ -36,24 +37,38 @@
 
 #infoCard {
  z-index: 3;
- height: 300px;
+ height: auto;
  width:  100%;
  position: absolute;
  display: none;
  font-family: 'Press Start 2P', cursive;
- margin: 400px 50% 20% 50%;
+ margin: 380px 50% 20% 50%;
  overflow-y: auto;
- opacity: .8;
+ opacity: .7;
+ box-shadow: 1px 1px 1px black;
 }
 
-#pokemonInfoType, #pokemonInfoMoves1,#pokemonInfoMoves2,#pokemonInfoMoves3, #pokemonInfoHabitat, #pokemonInfoDescription {
+.nameText {
+  margin-top: 10px;
+}
+
+#pokemonInfoType,  #pokemonInfoHabitat, #pokemonInfoDescription, #pokemonInfoWeight, #pokemonInfoHeight {
   font-size: 10px !important;
   margin-bottom: 10px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+#pokemonInfoMoves, #pokemonInfoMoves1,#pokemonInfoMoves2,#pokemonInfoMoves3 {
+  font-size: 10px !important;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 #pokemonInfoMoves {
-  width: 80%;
+  width: 70%;
   left: 0;
+  margin-left: 3px !important;
 
 }
 
@@ -139,6 +154,14 @@
 
 #evolvesFromCard {
   margin-bottom: 20px;
+  width: 500px;
+  box-shadow: 1px 1px 1px black;
+  opacity: .7;
+}
+
+.evolvesText {
+  margin-top: 10px;
+  margin-left: 10px;
 }
 
 
