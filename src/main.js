@@ -22,20 +22,59 @@ setTimeout(function(){
     for (let i = 1; i <= 151; i++) {
       setTimeout (function(){
         let j = parseInt(i);
+        // Get information from pokemon API
         $.get(`https://pokeapi.co/api/v2/pokemon/${i}`).then(function(response) {
-
-          console.log(response);
-
               $("#row1").append(`<div id='` + (j) + `'class='pokemonSprites col-1'><img src='${response.sprites.front_default}' alt='placeholder image of a pokemon for our pokedex.'></div>`)
               pokeArray.push(response);
-
-          console.log("Success");
         }).then(function(){
+          // Get species array information from API
+          $.get(`https://pokeapi.co/api/v2/pokemon-species/${i}`).then(function(response) {
+                pokeSpeciesArray.push(response);
+          }).then(function(){
+            console.log(pokeSpeciesArray);
+          }).fail(function(){
+            console.log("Species was NOT successful!")
+          });
+        }).then(function(){
+          // Make it so we can click any of the pokemon sprites and give their click a function
           $("#" + j).click(function(event){
-            debugger;
             let arrayNumber = (event.currentTarget.id);
-            console.log("Give me this number: " + arrayNumber);
+            console.log(arrayNumber);
+            // populate pokedex with sprites from selection
             $("#pokemonAnimation").html(`<img class='idle' src='${pokeArray[(arrayNumber - 1)].sprites.front_default}'>`);
+            if (`${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species}` == "null") {
+              $("#pokemonEvolveFromSprite").empty();
+            } else if ((arrayNumber) === 25 || (arrayNumber) === 35 || (arrayNumber) === 39 || (arrayNumber) === 113 || (arrayNumber) === 122 || (arrayNumber) === 124 || (arrayNumber) === 125 || (arrayNumber) === 126 || (arrayNumber) === 143) {
+              $("#pokemonEvolveFromSprite").empty();
+            } else {
+                $("#pokemonEvolveFromSprite").html(`<img class='idle' src='${pokeArray[(arrayNumber - 2)].sprites.front_default}'>`);
+            }
+
+            // populate INFO CARD with Name from selection
+            $("#pokemonInfoName").html(`<h4>${pokeArray[(arrayNumber - 1)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber - 1)].species.name.substring(1)}</h4><hr>`);
+            // populate INFO CARD with Description from selection
+            if (pokeSpeciesArray[(arrayNumber - 1)].flavor_text_entries.length > 0) {
+              let description = (`${pokeSpeciesArray[(arrayNumber - 1)].flavor_text_entries[(pokeSpeciesArray[(arrayNumber - 1)].flavor_text_entries.length-1)].flavor_text}`);
+              let fixedDescription = description.replace("\f", " ");
+              $('#pokemonInfoDescription').html('<h6>' + fixedDescription + '</h6><hr>');
+            }
+            // populate INFO CARD with TYPE from selection
+            if (pokeArray[(arrayNumber - 1)].types.length > 0) {
+              $('#pokemonInfoType').empty();
+              for(let t=0; t< pokeArray[(arrayNumber - 1)].types.length; t++) {
+                $("#pokemonInfoType").append(`<h6>Type `+ (t+1)+ `: ${pokeArray[(arrayNumber - 1)].types[t].type.name}</h6>`);
+              }
+            }
+            // populate INFO CARD with RANDOM MOVES from selection
+            if (pokeArray[(arrayNumber - 1)].moves.length > 0) {
+              $('#pokemonInfoSampleStatement').html("<h6>Sample Moves: </h6>");
+              $('#pokemonInfoMoves1').empty();
+              $('#pokemonInfoMoves2').empty();
+              $('#pokemonInfoMoves3').empty();
+              for(let m=0; m< 3; m++) {
+                $('#pokemonInfoMoves' + (m+1)).append(`<h6>${pokeArray[(arrayNumber - 1)].moves[Math.floor(Math.random() * `${pokeArray[(arrayNumber - 1)].moves[m].move.name}`.length)].move.name}</h6>`);
+              }
+            }
           });
         }).fail(function(){
           console.log("Failure");

@@ -36,14 +36,28 @@
 
 #infoCard {
  z-index: 3;
- height: 200px;
- width:  90%;
+ height: 300px;
+ width:  100%;
  position: absolute;
- margin-left: 5%;
- margin-right: 5%;
  display: none;
  font-family: 'Press Start 2P', cursive;
- margin: 600px 50% 20% 200px;
+ margin: 550px 50% 20% 50%;
+ overflow-y: auto;
+ opacity: .8;
+}
+
+#pokemonInfoType, #pokemonInfoMoves1,#pokemonInfoMoves2,#pokemonInfoMoves3, #pokemonInfoHabitat, #pokemonInfoDescription {
+  font-size: 10px !important;
+  margin-bottom: 10px;
+}
+
+#pokemonInfoMoves {
+  width: 80%;
+
+}
+
+#pokemonInfoName, #pokemonInfoDescription {
+  text-align: center;
 }
 
 #pokedexViewer {
@@ -98,16 +112,33 @@
   position: absolute;
   /* top, right, bottom left */
   margin: 800px 50% 20px 50%;
-  height: 250px;
+  height: 300px;
   width: auto;
   left: 0;
   bottom: 1;
 }
-
-.idle {
+#pokemonEvolveFromSprite {
+  z-index: 4;
+  position: absolute;
+  /* top, right, bottom left */
+  margin: 800px 90% 20px 10%;
+  height: 200px;
+  width: auto;
+  left: 0;
+  bottom: 1;
+  opacity: .9;
+}
+.idle, .idle2 {
   height: 110%;
   width: auto;
 }
+
+
+
+
+
+
+
 
 #soundIsOff {
   display: none;
