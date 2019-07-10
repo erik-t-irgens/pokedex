@@ -15,7 +15,7 @@
   align-content: center;
   position: absolute;
   font-family: 'Press Start 2P', cursive;
-  opacity: .4;
+  opacity: .7;
 }
 
 #environmentCard {
@@ -41,7 +41,7 @@
  position: absolute;
  display: none;
  font-family: 'Press Start 2P', cursive;
- margin: 550px 50% 20% 50%;
+ margin: 400px 50% 20% 50%;
  overflow-y: auto;
  opacity: .8;
 }
@@ -112,18 +112,18 @@
 
   position: absolute;
   /* top, right, bottom left */
-  margin: 650px 50% 20px 50%;
-  height: 300px;
+  margin: 650px 50% 150px 50%;
+  height: auto;
   width: auto;
   left: 0;
-  bottom: 1;
+  bottom: 0;
 }
 #pokemonEvolveFromSprite {
   z-index: 4;
   position: absolute;
   /* top, right, bottom left */
-  margin: auto 90% 200px 10%;
-  height: 200px;
+  margin: 650px 80% 100px 20%;
+  height: auto;
   width: auto;
   left: 0;
   bottom: 0;
@@ -137,7 +137,9 @@
 }
 
 
-
+#evolvesFromCard {
+  margin-bottom: 20px;
+}
 
 
 

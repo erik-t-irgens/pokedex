@@ -54,10 +54,14 @@ setTimeout(function(){
                 $("#pokemonAnimation").html(`<img class='idle' style='height:${parseFloat((pokeArray[(arrayNumber -1)].height)/10) * 10}vh;' src='https://www.pkparaiso.com/imagenes/xy/sprites/animados/nidoran_m.gif'>`);
                 $("#pokemonEvolveFromSprite").slideUp();
                 $("#pokemonEvolveFromSprite").empty();
+              } else if (`${pokeArray[(arrayNumber - 1)].species.name}` == "mr-mime") {
+                $("#pokemonAnimation").html(`<img class='idle' style='height:${parseFloat((pokeArray[(arrayNumber -1)].height)/10) * 10}vh;' src='https://www.pkparaiso.com/imagenes/xy/sprites/animados/mr._mime.gif'>`);
+                $("#pokemonEvolveFromSprite").slideUp();
+                $("#pokemonEvolveFromSprite").empty();
               } else {
                 $("#pokemonAnimation").html(`<img class='idle' style='height:${parseFloat((pokeArray[(arrayNumber -1)].height)/10) * 10}vh;' src='https://www.pkparaiso.com/imagenes/xy/sprites/animados/${pokeArray[(arrayNumber - 1)].species.name}.gif'>`);
                 // populate INFO CARD with evolved from SPRITE
-                if (`${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species}` == "null" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "pichu" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "cleffa" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "igglybuff" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "happiny" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "mime-jr" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "smoochum" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "elekid" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "magby" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "munchlax") {
+                if (`${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species}` == "null" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "pichu" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "cleffa" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "igglybuff" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "happiny" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "mime-jr" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "smoochum" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "elekid" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "magby" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "munchlax" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "tyrogue") {
                   $("#pokemonEvolveFromSprite").slideUp();
                   $("#pokemonEvolveFromSprite").empty();
                 } else if (`${pokeArray[(arrayNumber - 1)].species.name}` == "nidorina") {
