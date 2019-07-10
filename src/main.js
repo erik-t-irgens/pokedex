@@ -10,26 +10,43 @@ $(document).ready(function() {
 
 // let pokemonnumber = 151;
 
+// backend logic
+
+let pokeArray = [];
+let pokeSpeciesArray = [];
+
+
+// front end
+
 setTimeout(function(){
-  for (var i = 1; i <= 151; i++) {
-    // debugger;
-    let j = parseInt(i);
-    $.get(`https://pokeapi.co/api/v2/pokemon/${i}`).then(function(response) {
+    for (let i = 1; i <= 151; i++) {
+      setTimeout (function(){
+        let j = parseInt(i);
+        $.get(`https://pokeapi.co/api/v2/pokemon/${i}`).then(function(response) {
 
-      console.log(response);
+          console.log(response);
 
-          $("#row1").append(`<div id='pokeSprite` + (j) + `'class='pokemonSprites col-1'><img src='${response.sprites.front_default}' alt='placeholder image of a pokemon for our pokedex.'></div>`)
+              $("#row1").append(`<div id='` + (j) + `'class='pokemonSprites col-1'><img src='${response.sprites.front_default}' alt='placeholder image of a pokemon for our pokedex.'></div>`)
+              pokeArray.push(response);
+
+          console.log("Success");
+        }).then(function(){
+          $("#" + j).click(function(event){
+            debugger;
+            let arrayNumber = (event.currentTarget.id);
+            console.log("Give me this number: " + arrayNumber);
+            $("#pokemonAnimation").html(`<img class='idle' src='${pokeArray[(arrayNumber - 1)].sprites.front_default}'>`);
+          });
+        }).fail(function(){
+          console.log("Failure");
+        });
+      }, i*60);
+    }
 
 
 
-
-
-      console.log("Success");
-    }).fail(function(){
-      console.log("Failure");
-    });
-  }
 }, 0);
+//
 
 
 
