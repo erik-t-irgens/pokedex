@@ -53,6 +53,7 @@
 
 #pokemonInfoMoves {
   width: 80%;
+  left: 0;
 
 }
 
@@ -111,7 +112,7 @@
 
   position: absolute;
   /* top, right, bottom left */
-  margin: 800px 50% 20px 50%;
+  margin: 650px 50% 20px 50%;
   height: 300px;
   width: auto;
   left: 0;
@@ -121,16 +122,17 @@
   z-index: 4;
   position: absolute;
   /* top, right, bottom left */
-  margin: 800px 90% 20px 10%;
+  margin: auto 90% 200px 10%;
   height: 200px;
   width: auto;
   left: 0;
-  bottom: 1;
+  bottom: 0;
   opacity: .9;
   display: none;
 }
 .idle, .idle2 {
-  height: 110%;
+  max-height: 20vh;
+  min-height: 5vh;
   width: auto;
 }
 
