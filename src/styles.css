@@ -127,6 +127,7 @@
   left: 0;
   bottom: 1;
   opacity: .9;
+  display: none;
 }
 .idle, .idle2 {
   height: 110%;

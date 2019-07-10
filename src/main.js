@@ -24,6 +24,7 @@ setTimeout(function(){
         let j = parseInt(i);
         // Get information from pokemon API
         $.get(`https://pokeapi.co/api/v2/pokemon/${i}`).then(function(response) {
+          // populate pokedex dropdown menu with sprites
               $("#row1").append(`<div id='` + (j) + `'class='pokemonSprites col-1'><img src='${response.sprites.front_default}' alt='placeholder image of a pokemon for our pokedex.'></div>`)
               pokeArray.push(response);
         }).then(function(){
@@ -40,14 +41,16 @@ setTimeout(function(){
           $("#" + j).click(function(event){
             let arrayNumber = (event.currentTarget.id);
             console.log(arrayNumber);
-            // populate pokedex with sprites from selection
+            // populate INFO CARD with SPRITES from selection
             $("#pokemonAnimation").html(`<img class='idle' src='${pokeArray[(arrayNumber - 1)].sprites.front_default}'>`);
-            if (`${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species}` == "null") {
-              $("#pokemonEvolveFromSprite").empty();
-            } else if ((arrayNumber) === 25 || (arrayNumber) === 35 || (arrayNumber) === 39 || (arrayNumber) === 113 || (arrayNumber) === 122 || (arrayNumber) === 124 || (arrayNumber) === 125 || (arrayNumber) === 126 || (arrayNumber) === 143) {
+            // populate INFO CARD with evolved from SPRITE
+            if (`${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species}` == "null" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "pichu" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "cleffa" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "igglybuff" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "happiny" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "mime-jr" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "smoochum" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "elekid" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "magby" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "munchlax") {
+              $("#pokemonEvolveFromSprite").slideUp();
               $("#pokemonEvolveFromSprite").empty();
             } else {
-                $("#pokemonEvolveFromSprite").html(`<img class='idle' src='${pokeArray[(arrayNumber - 2)].sprites.front_default}'>`);
+              $("#pokemonEvolveFromSprite").hide();
+              $("#pokemonEvolveFromSprite").html(`<div class='card bg-light border-dark' id='evolvesFromCard'><h6>${pokeArray[(arrayNumber - 1)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber - 1)].species.name.substring(1)} evolves from ${pokeArray[(arrayNumber - 1)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber - 2)].species.name.substring(1)}</h6></div><img class='idle' src='${pokeArray[(arrayNumber - 2)].sprites.front_default}'>`);
+              $("#pokemonEvolveFromSprite").slideDown();
             }
 
             // populate INFO CARD with Name from selection
