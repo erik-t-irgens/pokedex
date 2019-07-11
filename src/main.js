@@ -3,8 +3,8 @@ import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
-import pokeArray from './pokedex.js'
-import pokeSpeciesArray from './pokedex.js'
+// import pokeArray from './pokedex.js'
+// import pokeSpeciesArray from './pokedex.js'
 
 $(document).ready(function() {
 // HTML elements and button logic
@@ -42,56 +42,77 @@ setTimeout(function(){
         }).then(function(){
           // Make it so we can click any of the pokemon sprites and give their click a function
           $("#" + j).click(function(event){
+            // put all LET variables here for scoping
             let arrayNumber = (event.currentTarget.id);
-            console.log(arrayNumber);
+            let height = (parseFloat((pokeArray[(arrayNumber -1)].height)/10) * 10);
+            // let evolvesFromHeight = (parseFloat((pokeArray[(arrayNumber -2)].height)/10) * 10);
+            debugger;
+            let previousPokeName = '';
+            let previousPokeHeight = '';
+            if ((arrayNumber - 2) < 0) {
+              previousPokeName = '';
+              previousPokeHeight = '';
+            } else {
+              previousPokeName = pokeArray[(arrayNumber - 2)].species.name;
+              previousPokeHeight = (parseFloat((pokeArray[(arrayNumber -2)].height)/10) * 10);
+            }
+            let evolvesFromDisplayName = (previousPokeName.charAt(0).toUpperCase() + previousPokeName.substring(1));
+            let pokemonName = pokeArray[(arrayNumber - 1)].species.name;
+            let evolvesFromSpecies = pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species;
+
+            let evolvesFromSpeciesSlideUpEmpty = function(){
+              $("#pokemonEvolveFromSprite").slideUp();
+              $("#pokemonEvolveFromSprite").empty();
+            };
             // populate INFO CARD with SPRITES from selection
 
-
-            if (`${pokeArray[(arrayNumber - 1)].species.name}` == "nidoran-f") {
-                $("#pokemonAnimation").html(`<img class='idle' style='height:${parseFloat((pokeArray[(arrayNumber -1)].height)/10) * 10}vh;' src='https://www.pkparaiso.com/imagenes/xy/sprites/animados/nidoran_f.gif'>`);
-                $("#pokemonEvolveFromSprite").slideUp();
-                $("#pokemonEvolveFromSprite").empty();
-              } else if (`${pokeArray[(arrayNumber - 1)].species.name}` == "nidoran-m") {
-                $("#pokemonAnimation").html(`<img class='idle' style='height:${parseFloat((pokeArray[(arrayNumber -1)].height)/10) * 10}vh;' src='https://www.pkparaiso.com/imagenes/xy/sprites/animados/nidoran_m.gif'>`);
-                $("#pokemonEvolveFromSprite").slideUp();
-                $("#pokemonEvolveFromSprite").empty();
-              } else if (`${pokeArray[(arrayNumber - 1)].species.name}` == "mr-mime") {
-                $("#pokemonAnimation").html(`<img class='idle' style='height:${parseFloat((pokeArray[(arrayNumber -1)].height)/10) * 10}vh;' src='https://www.pkparaiso.com/imagenes/xy/sprites/animados/mr._mime.gif'>`);
-                $("#pokemonEvolveFromSprite").slideUp();
-                $("#pokemonEvolveFromSprite").empty();
+            if (`${pokemonName}` == "nidoran-f") {
+                $("#pokemonAnimation").html(`<img class='idle' style='height:${height}vh;' src='https://www.pkparaiso.com/imagenes/xy/sprites/animados/nidoran_f.gif'>`);
+                evolvesFromSpeciesSlideUpEmpty();
+              } else if (`${pokemonName}` == "nidoran-m") {
+                $("#pokemonAnimation").html(`<img class='idle' style='height:${height}vh;' src='https://www.pkparaiso.com/imagenes/xy/sprites/animados/nidoran_m.gif'>`);
+                evolvesFromSpeciesSlideUpEmpty();
+              } else if (`${pokemonName}` == "mr-mime") {
+                $("#pokemonAnimation").html(`<img class='idle' style='height:${height}vh;' src='https://www.pkparaiso.com/imagenes/xy/sprites/animados/mr._mime.gif'>`);
+                evolvesFromSpeciesSlideUpEmpty();
               } else {
-                $("#pokemonAnimation").html(`<img class='idle' style='height:${parseFloat((pokeArray[(arrayNumber -1)].height)/10) * 10}vh;' src='https://www.pkparaiso.com/imagenes/xy/sprites/animados/${pokeArray[(arrayNumber - 1)].species.name}.gif'>`);
+                $("#pokemonAnimation").html(`<img class='idle' style='height:${height}vh;' src='https://www.pkparaiso.com/imagenes/xy/sprites/animados/${pokemonName}.gif'>`);
                 // populate INFO CARD with evolved from SPRITE
-                if (`${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species}` == "null" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "pichu" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "cleffa" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "igglybuff" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "happiny" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "mime-jr" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "smoochum" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "elekid" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "magby" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "munchlax" || `${pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name}` == "tyrogue") {
-                  $("#pokemonEvolveFromSprite").slideUp();
-                  $("#pokemonEvolveFromSprite").empty();
-                } else if (`${pokeArray[(arrayNumber - 1)].species.name}` == "nidorina") {
-                  $("#pokemonEvolveFromSprite").hide();
-                  $("#pokemonEvolveFromSprite").html(`<div class='card bg-light border-dark' id='evolvesFromCard'><h6 class='evolvesText'>${pokeArray[(arrayNumber - 1)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber - 1)].species.name.substring(1)} evolves from ${pokeArray[(arrayNumber - 2)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber - 2)].species.name.substring(1)}</h6></div><img class='idle' style='height:${parseFloat((pokeArray[(arrayNumber -2)].height)/10) * 10}vh;' src='https://www.pkparaiso.com/imagenes/xy/sprites/animados/nidoran_f.gif'>`);
-                  $("#pokemonEvolveFromSprite").slideDown();
-                } else if (`${pokeArray[(arrayNumber - 1)].species.name}` == "nidorino") {
-                  $("#pokemonEvolveFromSprite").hide();
-                  $("#pokemonEvolveFromSprite").html(`<div class='card bg-light border-dark' id='evolvesFromCard'><h6 class='evolvesText'>${pokeArray[(arrayNumber - 1)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber - 1)].species.name.substring(1)} evolves from ${pokeArray[(arrayNumber - 2)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber - 2)].species.name.substring(1)}</h6></div><img class='idle' style='height:${parseFloat((pokeArray[(arrayNumber -2)].height)/10) * 10}vh;' src='https://www.pkparaiso.com/imagenes/xy/sprites/animados/nidoran_m.gif'>`);
-                  $("#pokemonEvolveFromSprite").slideDown();
-                } else if (`${pokeArray[(arrayNumber - 1)].species.name}` == "jolteon") {
-                  $("#pokemonEvolveFromSprite").hide();
-                  $("#pokemonEvolveFromSprite").html(`<div class='card bg-light border-dark' id='evolvesFromCard'><h6 class='evolvesText'>${pokeArray[(arrayNumber -1)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber -1)].species.name.substring(1)} evolves from ${pokeArray[(arrayNumber - 3)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber -3)].species.name.substring(1)}</h6></div><img class='idle' style='height:${parseFloat((pokeArray[(arrayNumber -3)].height)/10) * 10}vh;' src='https://www.pkparaiso.com/imagenes/xy/sprites/animados/${pokeArray[(arrayNumber - 3)].species.name}.gif'>`);
-                  $("#pokemonEvolveFromSprite").slideDown();
-                } else if (`${pokeArray[(arrayNumber - 1)].species.name}` == "flareon") {
-                  $("#pokemonEvolveFromSprite").hide();
-                  $("#pokemonEvolveFromSprite").html(`<div class='card bg-light border-dark' id='evolvesFromCard'><h6 class='evolvesText'>${pokeArray[(arrayNumber -1)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber -1)].species.name.substring(1)} evolves from ${pokeArray[(arrayNumber - 4)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber -4)].species.name.substring(1)}</h6></div><img class='idle' style='height:${parseFloat((pokeArray[(arrayNumber -4)].height)/10) * 10}vh;' src='https://www.pkparaiso.com/imagenes/xy/sprites/animados/${pokeArray[(arrayNumber - 4)].species.name}.gif'>`);
-                  $("#pokemonEvolveFromSprite").slideDown();
+                if (`${evolvesFromSpecies}` == "null") {
+                  let evolvesFromSpeciesName = '';
+                  evolvesFromSpeciesSlideUpEmpty();
                 } else {
-                  $("#pokemonEvolveFromSprite").hide();
-                  $("#pokemonEvolveFromSprite").html(`<div class='card bg-light border-dark' id='evolvesFromCard'><h6 class='evolvesText'>${pokeArray[(arrayNumber - 1)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber - 1)].species.name.substring(1)} evolves from ${pokeArray[(arrayNumber - 2)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber - 2)].species.name.substring(1)}</h6></div><img class='idle' style='height:${parseFloat((pokeArray[(arrayNumber -2)].height)/10) * 10}vh;' src='https://www.pkparaiso.com/imagenes/xy/sprites/animados/${pokeArray[(arrayNumber - 2)].species.name}.gif'>`);
-                  $("#pokemonEvolveFromSprite").slideDown();
+                  let evolvesFromSpeciesName = pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species.name;
+                  if (`${evolvesFromSpeciesName}` == "pichu" || `${evolvesFromSpeciesName}` == "cleffa" || `${evolvesFromSpeciesName}` == "igglybuff" || `${evolvesFromSpeciesName}` == "happiny" || `${evolvesFromSpeciesName}` == "mime-jr" || `${evolvesFromSpeciesName}` == "smoochum" || `${evolvesFromSpeciesName}` == "elekid" || `${evolvesFromSpeciesName}` == "magby" || `${evolvesFromSpeciesName}` == "munchlax" || `${evolvesFromSpeciesName}` == "tyrogue") {
+                    evolvesFromSpeciesSlideUpEmpty();
+                  } else if (`${pokemonName}` == "nidorina") {
+                    $("#pokemonEvolveFromSprite").hide();
+                    $("#pokemonEvolveFromSprite").html(`<div class='card bg-light border-dark' id='evolvesFromCard'><h6 class='evolvesText'>${pokemonName.charAt(0).toUpperCase() + pokemonName.substring(1)} evolves from ${evolvesFromDisplayName}</h6></div><img class='idle' style='height:${previousPokeHeight}vh;' src='https://www.pkparaiso.com/imagenes/xy/sprites/animados/nidoran_f.gif'>`);
+                    $("#pokemonEvolveFromSprite").slideDown();
+                  } else if (`${pokemonName}` == "nidorino") {
+                    $("#pokemonEvolveFromSprite").hide();
+                    $("#pokemonEvolveFromSprite").html(`<div class='card bg-light border-dark' id='evolvesFromCard'><h6 class='evolvesText'>${pokemonName.charAt(0).toUpperCase() + pokemonName.substring(1)} evolves from ${evolvesFromDisplayName}</h6></div><img class='idle' style='height:${previousPokeHeight}vh;' src='https://www.pkparaiso.com/imagenes/xy/sprites/animados/nidoran_m.gif'>`);
+                    $("#pokemonEvolveFromSprite").slideDown();
+                  } else if (`${pokemonName}` == "jolteon") {
+                    evolvesFromSpeciesSlideUpEmpty();
+                    $("#pokemonEvolveFromSprite").html(`<div class='card bg-light border-dark' id='evolvesFromCard'><h6 class='evolvesText'>${pokeArray[(arrayNumber -1)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber -1)].species.name.substring(1)} evolves from ${pokeArray[(arrayNumber - 3)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber -3)].species.name.substring(1)}</h6></div><img class='idle' style='height:${parseFloat((pokeArray[(arrayNumber -3)].height)/10) * 10}vh;' src='https://www.pkparaiso.com/imagenes/xy/sprites/animados/${pokeArray[(arrayNumber - 3)].species.name}.gif'>`);
+                    $("#pokemonEvolveFromSprite").slideDown();
+                  } else if (`${pokemonName}` == "flareon") {
+                    $("#pokemonEvolveFromSprite").hide();
+                    $("#pokemonEvolveFromSprite").html(`<div class='card bg-light border-dark' id='evolvesFromCard'><h6 class='evolvesText'>${pokeArray[(arrayNumber -1)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber -1)].species.name.substring(1)} evolves from ${pokeArray[(arrayNumber - 4)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber -4)].species.name.substring(1)}</h6></div><img class='idle' style='height:${parseFloat((pokeArray[(arrayNumber -4)].height)/10) * 10}vh;' src='https://www.pkparaiso.com/imagenes/xy/sprites/animados/${pokeArray[(arrayNumber - 4)].species.name}.gif'>`);
+                    $("#pokemonEvolveFromSprite").slideDown();
+                  } else {
+                    $("#pokemonEvolveFromSprite").hide();
+                    $("#pokemonEvolveFromSprite").html(`<div class='card bg-light border-dark' id='evolvesFromCard'><h6 class='evolvesText'>${pokemonName.charAt(0).toUpperCase() + pokemonName.substring(1)} evolves from ${evolvesFromDisplayName}</h6></div><img class='idle' style='height:${previousPokeHeight}vh;' src='https://www.pkparaiso.com/imagenes/xy/sprites/animados/${previousPokeName}.gif'>`);
+                    $("#pokemonEvolveFromSprite").slideDown();
+                  }
                 }
               }
 
 
 
             // populate INFO CARD with Name from selection
-            $("#pokemonInfoName").html(`<h4 class='nameText'>${pokeArray[(arrayNumber - 1)].species.name.charAt(0).toUpperCase() + pokeArray[(arrayNumber - 1)].species.name.substring(1)}</h4><hr>`);
+            $("#pokemonInfoName").html(`<h4 class='nameText'>${pokemonName.charAt(0).toUpperCase() + pokemonName.substring(1)}</h4><hr>`);
             // populate INFO CARD with Description from selection
             if (pokeSpeciesArray[(arrayNumber - 1)].flavor_text_entries.length > 0) {
               let description = (`${pokeSpeciesArray[(arrayNumber - 1)].flavor_text_entries[(pokeSpeciesArray[(arrayNumber - 1)].flavor_text_entries.length-1)].flavor_text}`);
@@ -215,108 +236,4 @@ $("#soundIsOff").click(function(){
   $("#soundIsOff").hide();
 });
 
-
-
-
-
-
-
-
-
-// LISA front end logic
-
-
-
-
-
-  $('#comicButton').click(function() {
-    let pokemonName = $('#enteredPokemonName').val();
-    $('#enteredPokemonName').val("");
-
-    // let promise = new Promise(function(resolve, reject){
-    let request = new XMLHttpRequest();
-    const url = `https://CORS-anywhere.herokuapp.com/https://pokeapi.co/api/v2/pokemon-species/${pokemonName}/
-    `;
-
-    request.onreadystatechange = function() {
-      if (this.readyState === 4 && this.status === 200) {
-        const response = JSON.parse(this.responseText);
-        getElements(response);
-      }
-
-    }
-    request.open("GET", url, true);
-    request.send();
-
-
-    const getElements = function(response) {
-      //To get Pokemon habitat: ***** "pokemon-species"
-      $('.showHabitat').text(`${response.habitat.name}`);
-
-      //To get Pokemon evolves from: ***** "pokemon-species"
-
-      if (`${response.evolves_from_species}` == "null") {
-        $('.showEvolution').text("This is a Basic Pokemon"); }
-        else {
-          $('.showEvolution').html("Evolves from:" + "<br>" + `${response.evolves_from_species.name}`);
-        }
-
-        //To get Pokemon description: ***** "pokemon-species"
-        if (response.flavor_text_entries.length > 0) {
-          var description = (`${response.flavor_text_entries[(response.flavor_text_entries.length-1)].flavor_text}`);
-          var fixedDescription = description.replace("\f", " ");
-          $('.showDescription').text(fixedDescription);
-
-
-          console.log(`${response.flavor_text_entries[(response.flavor_text_entries.length-1)].flavor_text}`);
-        }
-
-      }
-
-
-      // SPRITE TYPE MOVES
-
-
-      let request2 = new XMLHttpRequest();
-      const url2 = `https://CORS-anywhere.herokuapp.com/https://pokeapi.co/api/v2/pokemon/${pokemonName}/
-      `;
-
-      request2.onreadystatechange = function() {
-        if (this.readyState === 4 && this.status === 200) {
-          const response2 = JSON.parse(this.responseText);
-          getElements2(response2);
-        }
-      }
-
-      request2.open("GET", url2, true);
-      request2.send();
-
-      const getElements2 = function(response2) {
-        //To get defautlt sprite: *****"pokemon"
-        $('.showDefault').html(`<img src="${response2.sprites.front_default}">`);
-
-        //To get Pokemon type: ***** "pokemon"
-        if (response2.types.length > 0) {
-          $('.showTypes').empty();
-          for(let i=0; i< response2.types.length; i++) {
-            $('.showTypes').append(`${response2.types[i].type.name}` + "<br>");
-          }
-
-        }
-
-        if (response2.moves.length > 0) {
-          $('.showMoves').empty();
-          for(let i=0; i< 3; i++) {
-            // $('.showMoves').append(`${response2.moves[i].move.name}` + "<br>");
-            // var movesArray = [`${response2.moves[i].move.name}`];
-            // var randomMoves = movesArray[Math.floor(Math.random() * movesArray.length)];
-            $('.showMoves').append(`${response2.moves[Math.floor(Math.random() * `${response2.moves[i].move.name}`.length)].move.name}` + "<br>");
-            // console.log(randomMoves);
-
-          }
-
-        }
-
-      };
     });
-  });
