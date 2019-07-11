@@ -3,33 +3,31 @@ import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
-// import pokeArray from './pokedex.js'
-// import pokeSpeciesArray from './pokedex.js'
-
 $(document).ready(function() {
-// HTML elements and button logic
-setTimeout(function(){
-  $("#pokemonTitle").slideDown();
-  setTimeout(function(){
-    $("#pokemonTitle").slideUp();
-    $("#pokedexTitle").slideDown();
-  }, 2000);
-}, 2000);
-setTimeout(function(){
-
-}, 500);
-
-
-
 // backend logic
-
+// arrays for pokemon to inhabit
 let pokeArray = [];
 let pokeSpeciesArray = [];
 
+// audio for music and muting
+var myAudio = document.getElementById('myAudio');
+document.getElementById('myLoopingAudio').loop = true;
+var myLoopingAudio = document.getElementById('myLoopingAudio');
+const introSongDuration = (myAudio.duration * 1000);
+
+setTimeout(function(){
+  if (myAudio.muted == false) {
+    myLoopingAudio.play();
+  }
+},introSongDuration);
+
+let backgroundValue = '';
+  myAudio.play();
 
 // front end
 
 setTimeout(function(){
+
     for (let i = 1; i <= 151; i++) {
       setTimeout (function(){
         let j = parseInt(i);
@@ -43,20 +41,17 @@ setTimeout(function(){
           $.get(`https://pokeapi.co/api/v2/pokemon-species/${i}`).then(function(response) {
                 pokeSpeciesArray.push(response);
           }).then(function(){
-            console.log(pokeArray[10]);
-            console.log(pokeArray[131]);
-            console.log(pokeSpeciesArray);
+
           }).fail(function(){
-            console.log("Species was NOT successful!")
+            alert("Species API call failure. Try again!")
           });
         }).then(function(){
-          // Make it so we can click any of the pokemon sprites and give their click a function
+          // Allows for sprites in the list to be clicked
           $("#" + j).click(function(event){
-            // put all LET variables here for scoping
+            // once clicked, the following functions will perform
+            // all refactored variables for use later
             let arrayNumber = (event.currentTarget.id);
             let height = (parseFloat((pokeArray[(arrayNumber -1)].height)/10) * 10);
-            // let evolvesFromHeight = (parseFloat((pokeArray[(arrayNumber -2)].height)/10) * 10);
-            debugger;
             let previousPokeName = '';
             let previousPokeHeight = '';
             if ((arrayNumber - 2) < 0) {
@@ -69,11 +64,11 @@ setTimeout(function(){
             let evolvesFromDisplayName = (previousPokeName.charAt(0).toUpperCase() + previousPokeName.substring(1));
             let pokemonName = pokeArray[(arrayNumber - 1)].species.name;
             let evolvesFromSpecies = pokeSpeciesArray[(arrayNumber - 1)].evolves_from_species;
-
             let evolvesFromSpeciesSlideUpEmpty = function(){
               $("#pokemonEvolveFromSprite").slideUp();
               $("#pokemonEvolveFromSprite").empty();
             };
+
             // populate INFO CARD with SPRITES from selection
 
             if (`${pokemonName}` == "nidoran-f") {
@@ -87,7 +82,9 @@ setTimeout(function(){
                 evolvesFromSpeciesSlideUpEmpty();
               } else {
                 $("#pokemonAnimation").html(`<img class='idle' style='height:${height}vh;' src='https://www.pkparaiso.com/imagenes/xy/sprites/animados/${pokemonName}.gif'>`);
-                // populate INFO CARD with evolved from SPRITE
+
+                // populate background with evolved from SPRITE and TEXT
+
                 if (`${evolvesFromSpecies}` == "null") {
                   let evolvesFromSpeciesName = '';
                   evolvesFromSpeciesSlideUpEmpty();
@@ -122,8 +119,11 @@ setTimeout(function(){
 
 
             // populate INFO CARD with Name from selection
+
             $("#pokemonInfoName").html(`<h4 class='nameText'>${pokemonName.charAt(0).toUpperCase() + pokemonName.substring(1)}</h4><hr>`);
+
             // populate INFO CARD with Description from selection
+
             if (pokeSpeciesArray[(arrayNumber - 1)].flavor_text_entries.length > 0) {
               let description = (`${pokeSpeciesArray[(arrayNumber - 1)].flavor_text_entries[(pokeSpeciesArray[(arrayNumber - 1)].flavor_text_entries.length-1)].flavor_text}`);
               let fixedDescription = description.replace("\f", " ");
@@ -137,19 +137,18 @@ setTimeout(function(){
               }
             }
 
-
             // populate INFO CARD with HABITAT information
+
             $('#pokemonInfoHabitat').html(`<h6>Habitat: ${pokeSpeciesArray[(arrayNumber - 1)].habitat.name.charAt(0).toUpperCase() + pokeSpeciesArray[(arrayNumber - 1)].habitat.name.substring(1)}</h6>`)
 
             // populate INFO CARD with HEIGHT and WEIGHT information
+
             $('#pokemonInfoHeight').html(`<h6>Height: ${height * 10}m</h6>`);
             $('#pokemonInfoWeight').html(`<h6>Weight: ${parseFloat(pokeArray[(arrayNumber - 1)].weight)/10}kg</h6>`);
 
-
-
-
             // populate INFO CARD with RANDOM MOVES from selection
             // KNOWN BUG -- SOMETIMES RETURNS NO RESULT FOR POKEMON WITH FEW MOVES
+
             if (pokeArray[(arrayNumber - 1)].moves.length > 0) {
               $('#pokemonInfoSampleStatement').html("<h6>Sample Moves: </h6>");
               $('#pokemonInfoMoves1').empty();
@@ -167,7 +166,7 @@ setTimeout(function(){
             }
           });
         }).fail(function(){
-          console.log("Failure");
+          alert("Pokemon API call failed. Try again!");
         });
       }, i*60);
     }
@@ -175,79 +174,97 @@ setTimeout(function(){
 
 
 }, 0);
-//
 
 
+// logic for introduction animations
 
-  // for (var j = 0; j < 16; j++) {
-  //   for (var i = 0; i < 10; i++) {
-  //     $("#row" + (j + 1)).append(`"<div id='pokeSprite" + (i + 1) + "'class='pokemonSprites col-1'><img src='${response2.sprites.front_default}' alt='placeholder image of a pokemon for our pokedex.'></div>"`)
-  //   }
-  // }
+  setTimeout(function(){
 
+    $("#pokemonTitle").fadeIn(1000);
+    setTimeout(function(){
+      $("#pokemonTitle").fadeOut(1000);
+      setTimeout(function(){
+        $("#pokedexTitle").fadeIn(1000);
+        setTimeout(function(){
+          $("#titleScreen").fadeOut(1000);
+          setTimeout(function(){
+            $("#mainBoard").slideDown(3000);
+            setTimeout(function(){
+              setTimeout(function(){
+                  $("#background1").fadeIn(1000);
 
-setInterval(function(){
-  if (parseInt($("#backgroundSlider").val()) === 1){
-    $("#background1").show();
-    $("#background2").hide();
-    $("#background3").hide();
-    $("#background4").hide();
-    $("#background5").hide();
+                  setInterval(function(){
+                    backgroundValue = parseInt($("#backgroundSlider").val());
+                    if (backgroundValue === 1){
+                      $("#background1").show();
+                      $("#background2").hide();
+                      $("#background3").hide();
+                      $("#background4").hide();
+                      $("#background5").hide();
 
-  } else if (parseInt($("#backgroundSlider").val()) === 2){
-    $("#background1").hide();
-    $("#background2").show();
-    $("#background3").hide();
-    $("#background4").hide();
-    $("#background5").hide();
-  } else if (parseInt($("#backgroundSlider").val()) === 3){
-    $("#background1").hide();
-    $("#background2").hide();
-    $("#background3").show();
-    $("#background4").hide();
-    $("#background5").hide();
-  } else if (parseInt($("#backgroundSlider").val()) === 4){
-    $("#background1").hide();
-    $("#background2").hide();
-    $("#background3").hide();
-    $("#background4").show();
-    $("#background5").hide();
-  } else {
-    $("#background1").hide();
-    $("#background2").hide();
-    $("#background3").hide();
-    $("#background4").hide();
-    $("#background5").show();
+                    } else if (backgroundValue === 2){
+                      $("#background1").hide();
+                      $("#background2").show();
+                      $("#background3").hide();
+                      $("#background4").hide();
+                      $("#background5").hide();
+                    } else if (backgroundValue === 3){
+                      $("#background1").hide();
+                      $("#background2").hide();
+                      $("#background3").show();
+                      $("#background4").hide();
+                      $("#background5").hide();
+                    } else if (backgroundValue === 4){
+                      $("#background1").hide();
+                      $("#background2").hide();
+                      $("#background3").hide();
+                      $("#background4").show();
+                      $("#background5").hide();
+                    } else {
+                      $("#background1").hide();
+                      $("#background2").hide();
+                      $("#background3").hide();
+                      $("#background4").hide();
+                      $("#background5").show();
 
-  }
-}, 30);
+                    }
+                  }, 30);
 
+              }, 3500);
+            }, 1000);
+          }, 1500);
+        }, 1500);
+      }, 1500);
+    }, 4000);
+  }, 2000);
 
-$("#pokedexButton").click(function(){
-  $("#pokedexcard").slideToggle(200);
+// Button logic
+
+  $("#pokedexButton").click(function(){
+    $("#pokedexcard").slideToggle(200);
+  });
+
+  $("#backgroundButton").click(function(){
+    $("#environmentCard").slideToggle(200);
+  });
+
+  $("#infoButton").click(function(){
+    $("#infoCard").slideToggle(200);
+  });
+
+  $("#pictureButton").click(function(){
+   window.print();
+  });
+
+  $("#soundIsOn").click(function(){
+    myAudio.muted=true;
+    myLoopingAudio.pause();
+    $("#soundIsOff").show();
+    $("#soundIsOn").hide();
+  });
+  $("#soundIsOff").click(function(){
+    myLoopingAudio.play();
+    $("#soundIsOn").show();
+    $("#soundIsOff").hide();
+  });
 });
-
-$("#backgroundButton").click(function(){
-  $("#environmentCard").slideToggle(200);
-});
-
-$("#infoButton").click(function(){
-  $("#infoCard").slideToggle(200);
-});
-
-$("#pictureButton").click(function(){
- window.print();
-});
-
-
-// button logic
-$("#soundIsOn").click(function(){
-  $("#soundIsOff").show();
-  $("#soundIsOn").hide();
-});
-$("#soundIsOff").click(function(){
-  $("#soundIsOn").show();
-  $("#soundIsOff").hide();
-});
-
-    });

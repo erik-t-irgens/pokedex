@@ -1,128 +1,129 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <title>Pokedex</title>
-  </head>
-  <body>
-    <div class="container-fluid">
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <title>Pokedex</title>
+</head>
+<body>
+  <div class="container-fluid">
     <!-- animation introduction! -->
-      <div id="titleScreen">
-        <div id="pokemonTitle">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1200px-International_Pok%C3%A9mon_logo.svg.png" alt="image of pokemon title">
+    <div id="titleScreen">
+      <audio id="myAudio" src="https://opengameart.org/sites/default/files/Grassy%20World%20%288-Bit_Orchestral%20Overture%29%20-%20Main%20Title%20Theme_0.mp3">
+        <audio id="myLoopingAudio" src="https://opengameart.org/sites/default/files/audio_preview/Juhani%20Junkala%20%5BChiptune%20Adventures%5D%201.%20Stage%201.ogg.mp3">
+
+        </audio>
+      </audio>
+        <img id="pokemonTitle" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1200px-International_Pok%C3%A9mon_logo.svg.png" alt="image of pokemon title">
+        <img id="pokedexTitle"src="https://astro.temple.edu/~tuf09411/Images/Pokedex2.png" alt="image of a pokedex">
+    </div>
+
+    <!-- entire board -->
+
+    <div id="mainBoard">
+      <!-- tabs -->
+      <nav id="navbar" class="navbar navbar-inverse navbar-fixed-top card bg-dark">
+        <div class="container-fluid btn-group" role="group">
+          <button class="btn btn-outline-warning navbar-btn navigationbutton" id="pokedexButton"><img src="http://www.sclance.com/pngs/pokedex-png/pokedex_png_1093555.png" id="pokedeximage"></button>
+          <button class="btn btn-outline-warning navbar-btn navigationbutton" id="infoButton">?</button>
+          <button class="btn btn-outline-warning navbar-btn navigationbutton" id="soundIsOn">&#128266;</button>
+          <button class="btn btn-outline-warning navbar-btn navigationbutton" id="soundIsOff">&#128263;</button>
+          <button class="btn btn-outline-warning navbar-btn navigationbutton" id="backgroundButton">&#127748;</button>
+          <button class="btn btn-outline-warning navbar-btn navigationbutton" id="pictureButton">&#128248;</button>
         </div>
-        <div id="pokedexTitle">
-          <img src="https://astro.temple.edu/~tuf09411/Images/Pokedex2.png" alt="image of a pokedex">
-        </div>
-      </div>
+      </nav>
+      <!-- tab hidden items, such as the pokedex card -->
 
-      <!-- entire board -->
-
-      <div id="mainBoard">
-        <!-- tabs -->
-        <nav id="navbar" class="navbar navbar-inverse navbar-fixed-top card bg-dark">
-          <div class="container-fluid btn-group" role="group">
-            <button class="btn btn-outline-warning navbar-btn navigationbutton" id="pokedexButton"><img src="http://www.sclance.com/pngs/pokedex-png/pokedex_png_1093555.png" id="pokedeximage"></button>
-            <button class="btn btn-outline-warning navbar-btn navigationbutton" id="infoButton">?</button>
-            <button class="btn btn-outline-warning navbar-btn navigationbutton" id="soundIsOn">&#128266;</button>
-            <button class="btn btn-outline-warning navbar-btn navigationbutton" id="soundIsOff">&#128263;</button>
-            <button class="btn btn-outline-warning navbar-btn navigationbutton" id="backgroundButton">&#127748;</button>
-            <button class="btn btn-outline-warning navbar-btn navigationbutton" id="pictureButton">&#128248;</button>
-          </div>
-        </nav>
-    <!-- tab hidden items, such as the pokedex card -->
-
-        <div class="row">
-          <div class="col-md-12">
-            <!-- card for sprites to populate in -->
-            <div id="pokedexcard" class="card bg-light border-dark">
-              <div class="row" id="row1">
-              </div>
-              </div>
+      <div class="row">
+        <div class="col-md-12">
+          <!-- card for sprites to populate in -->
+          <div id="pokedexcard" class="card bg-light border-dark">
+            <div class="row" id="row1">
             </div>
           </div>
         </div>
-
-
-        <div class="row">
-
-
-          <div class="col-md-6">
-            <div id="infoCard" class="card bg-light border-dark">
-              <div id="pokemonInfoName">
-
-              </div>
-              <div id="pokemonInfoDescription">
-
-              </div>
-              <div id="pokemonInfoType">
-
-              </div>
-
-
-              <div class="row" id="pokemonInfoMoves">
-                <div class="col-sm-3" id="pokemonInfoSampleStatement">
-
-                </div>
-                <div class="col-sm-3" id="pokemonInfoMoves1">
-
-                </div>
-                <div class="col-sm-3" id="pokemonInfoMoves2">
-
-                </div>
-                <div class="col-sm-3" id="pokemonInfoMoves3">
-
-                </div>
-              </div>
-              <div id="pokemonInfoHabitat">
-
-              </div>
-              <div id="pokemonInfoHeight">
-
-              </div>
-              <div id="pokemonInfoWeight">
-
-              </div>
-            </div>
-          </div>
-
-
-          <div class="col-md-6">
-            <div id="environmentCard">
-              <div class="form-group">
-                <label for="formControlRange">Time of Day</label>
-                <input type="range" min="1" max="5" step="1" value="1" class="form-control-range" id="backgroundSlider">
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card" id="pokedexViewer">
-          <img  id="background3" class="card-img-top" src="https://cdn.wallpapersafari.com/8/14/Q6DrOb.png" alt="Card image">
-          <img  id="background2" class="card-img-top" src="https://i.redd.it/lzcjcsrbhxhx.png" alt="Card image">
-          <img  id="background1" class="card-img-top" src="  http://www.sclance.com/backgrounds/pokemon-emerald-background/pokemon-emerald-background_1780145.png" alt="Card image">
-          <img  id="background5" class="card-img-top" src="https://cdn.hipwallpaper.com/i/6/21/EmFuTR.png" alt="Card image">
-          <img  id="background4" class="card-img-top" src="https://www.pixelstalk.net/wp-content/uploads/2016/07/HD-8-Bit-Photos-1.png" alt="Card image">
-          <div class="card-img-overlay">
-          </div>
-          <div id="pokemonAnimation">
-
-          </div>
-          <div id="pokemonEvolveFromSprite">
-
-          </div>
-        </div>
-
-
-
-
-
-      </div>
       </div>
 
 
 
+    <div class="row">
 
 
-  </body>
+      <div class="col-md-6">
+        <div id="infoCard" class="card bg-light border-dark">
+          <div id="pokemonInfoName">
+
+          </div>
+          <div id="pokemonInfoDescription">
+
+          </div>
+          <div id="pokemonInfoType">
+
+          </div>
+
+
+          <div class="row" id="pokemonInfoMoves">
+            <div class="col-sm-3" id="pokemonInfoSampleStatement">
+
+            </div>
+            <div class="col-sm-3" id="pokemonInfoMoves1">
+
+            </div>
+            <div class="col-sm-3" id="pokemonInfoMoves2">
+
+            </div>
+            <div class="col-sm-3" id="pokemonInfoMoves3">
+
+            </div>
+          </div>
+          <div id="pokemonInfoHabitat">
+
+          </div>
+          <div id="pokemonInfoHeight">
+
+          </div>
+          <div id="pokemonInfoWeight">
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-6">
+        <div id="environmentCard">
+          <div class="form-group">
+            <label for="formControlRange">Time of Day</label>
+            <input type="range" min="1" max="5" step="1" value="1" class="form-control-range" id="backgroundSlider">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="pokedexViewer">
+      <img  id="background3" class="card-img-top" src="https://cdn.wallpapersafari.com/8/14/Q6DrOb.png" alt="Card image">
+      <img  id="background2" class="card-img-top" src="https://i.redd.it/lzcjcsrbhxhx.png" alt="Card image">
+      <img  id="background1" class="card-img-top" src="  http://www.sclance.com/backgrounds/pokemon-emerald-background/pokemon-emerald-background_1780145.png" alt="Card image">
+      <img  id="background5" class="card-img-top" src="https://cdn.hipwallpaper.com/i/6/21/EmFuTR.png" alt="Card image">
+      <img  id="background4" class="card-img-top" src="https://www.pixelstalk.net/wp-content/uploads/2016/07/HD-8-Bit-Photos-1.png" alt="Card image">
+      <div class="card-img-overlay">
+      </div>
+      <div id="pokemonAnimation">
+
+      </div>
+      <div id="pokemonEvolveFromSprite">
+
+      </div>
+    </div>
+
+
+
+
+      </div>
+  </div>
+</div>
+
+
+
+
+
+</body>
 </html>
