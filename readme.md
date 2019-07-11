@@ -26,6 +26,7 @@ This web site utilizes the Poke API to retrieve information regarding first gene
 * In Terminal, enter the command: npm install
 * In Terminal, enter the command: npm run start
 * No API key is needed
+* OR go directly to the [Web page](http://erik-t-irgens.github.io/pokedex/)
 
 ## Known Bugs
 * No known bugs at this time.
