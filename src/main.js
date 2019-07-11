@@ -8,8 +8,18 @@ import './styles.css';
 
 $(document).ready(function() {
 // HTML elements and button logic
+setTimeout(function(){
+  $("#pokemonTitle").slideDown();
+  setTimeout(function(){
+    $("#pokemonTitle").slideUp();
+    $("#pokedexTitle").slideDown();
+  }, 2000);
+}, 2000);
+setTimeout(function(){
 
-// let pokemonnumber = 151;
+}, 500);
+
+
 
 // backend logic
 
@@ -132,7 +142,7 @@ setTimeout(function(){
             $('#pokemonInfoHabitat').html(`<h6>Habitat: ${pokeSpeciesArray[(arrayNumber - 1)].habitat.name.charAt(0).toUpperCase() + pokeSpeciesArray[(arrayNumber - 1)].habitat.name.substring(1)}</h6>`)
 
             // populate INFO CARD with HEIGHT and WEIGHT information
-            $('#pokemonInfoHeight').html(`<h6>Height: ${parseFloat(pokeArray[(arrayNumber - 1)].height)/10}m</h6>`);
+            $('#pokemonInfoHeight').html(`<h6>Height: ${height * 10}m</h6>`);
             $('#pokemonInfoWeight').html(`<h6>Weight: ${parseFloat(pokeArray[(arrayNumber - 1)].weight)/10}kg</h6>`);
 
 
@@ -223,6 +233,10 @@ $("#backgroundButton").click(function(){
 
 $("#infoButton").click(function(){
   $("#infoCard").slideToggle(200);
+});
+
+$("#pictureButton").click(function(){
+ window.print();
 });
 
 
