@@ -22,19 +22,39 @@ This web site utilizes the Poke API to retrieve information regarding first gene
 
 ## Setup/Installation Requirements
 
-* Clone this repository
-* In Terminal, enter the command: npm install
-* In Terminal, enter the command: npm run start
-* No API key is needed
-* OR go directly to the [Web page](http://erik-t-irgens.github.io/pokedex/)
-
+1. Clone this repository:
+    ```
+    $ git clone https://github.com/erik-t-irgens/pokedex
+    ```
+2. Install correct dependencies (while inside the project directory)
+    ```
+    $ npm install
+    ```
+3. Begin running the application (while inside the project directory)
+    ```
+    $ npm run start
+    ```
+4. Visit the application via web browser:
+    ```
+    localhost:5000/
+    ```
+    
+    OR
+    
+  Visit the live hosted version of this application on GitHub Pages
+  ```
+  http://erik-t-irgens.github.io/pokedex/
+  ```
+  
 ## Known Bugs
-* No known bugs at this time.
+* Sometimes, when first loading the page, Pokemon may appear out of order in the drop-down menu. If this occurs, some functionality will have unintended results.
 
 ## Technologies Used
 * JavaScript
 * jQuery
 * Bootstrap
+* Node
+* WebPack
 * Poke API
 
 ## Support and contact details
